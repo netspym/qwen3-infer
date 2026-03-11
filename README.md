@@ -1,6 +1,7 @@
 # Qwen3 Inference
 
-A Rust-based inference engine for Qwen3 models (chat and embedding) with CPU optimization.
+A Rust-based super light-weight inference engine for Qwen3 small models (chat and embedding) with CPU optimization.
+You could run it in a 2 cores old cpu or clound server without calling external APIs
 
 ## Supported Platforms
 
