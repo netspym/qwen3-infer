@@ -1,0 +1,49 @@
+[package]
+name = "qwen3_infer"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "qwen3_infer"
+crate-type = ["cdylib", "rlib"]  # cdylib for Python, rlib for Rust
+
+[[bin]]
+name = "qwen3-infer"
+path = "src/main.rs"
+
+[features]
+default = []
+# Use Apple Accelerate on macOS
+accelerate = ["candle-core/accelerate", "candle-nn/accelerate", "candle-transformers/accelerate"]
+# Use Intel MKL (works on Intel and AMD CPUs)
+mkl = ["candle-core/mkl", "candle-nn/mkl", "candle-transformers/mkl"]
+
+[dependencies]
+# Candle ML framework
+candle-core = "0.9"
+candle-nn = "0.9"
+candle-transformers = "0.9"
+
+# Tokenizer
+tokenizers = "0.20"
+
+# Multi-threading
+rayon = "1.10"
+
+# Python bindings
+pyo3 = { version = "0.22", features = ["extension-module"] }
+
+# Utilities
+anyhow = "1.0"
+reqwest = { version = "0.12", features = ["blocking"] }
+serde_json = "1.0"
+indicatif = "0.17"
+dirs = "5.0"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"

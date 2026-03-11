@@ -1,0 +1,84 @@
+# Qwen3 Inference Configuration
+# ================================
+
+# Model Settings
+[model]
+# Model name on ModelScope (e.g., "Qwen/Qwen3-0.6B", "Qwen/Qwen3-Embedding-0.6B")
+name = "Qwen/Qwen3-Embedding-0.6B"
+
+# Model type: "chat" or "embedding"
+type = "embedding"
+
+# Model source URL (currently only modelscope.cn supported)
+source = "modelscope.cn"
+
+# Data type: "f32" or "f16" (f16 may not work well on CPU)
+dtype = "f32"
+
+# Generation Parameters (only used for chat models)
+[generation]
+# Maximum number of tokens to generate
+max_tokens = 500
+
+# Temperature for sampling (0.0 = deterministic, higher = more random)
+temperature = 0.1
+
+# Top-p (nucleus) sampling threshold
+top_p = 0.9
+
+# Random seed for reproducibility (change for different outputs)
+seed = 42
+
+# Prompt Settings
+[prompt]
+# System prompt (optional, leave empty for no system prompt)
+system = ""
+
+# User message to send
+user = "你是谁研发的？"
+
+# Disable thinking mode (Qwen3 specific)
+# When true, adds /no_think to suppress chain-of-thought reasoning
+no_think = true
+
+# Chat template format
+# Available: "chatml" (default for Qwen3)
+template = "chatml"
+
+
+# =============================================================================
+# Example Configurations
+# =============================================================================
+#
+# --- Qwen3-0.6B Chat Model ---
+# [model]
+# name = "Qwen/Qwen3-0.6B"
+# type = "chat"
+#
+# --- Qwen3-1.7B Chat Model ---
+# [model]
+# name = "Qwen/Qwen3-1.7B"
+# type = "chat"
+#
+# --- Qwen3-Embedding-0.6B ---
+# [model]
+# name = "Qwen/Qwen3-Embedding-0.6B"
+# type = "embedding"
+#
+# --- With System Prompt ---
+# [prompt]
+# system = "You are a helpful assistant that responds in Chinese."
+# user = "What is the capital of France?"
+# no_think = true
+#
+# --- Creative Writing (higher temperature) ---
+# [generation]
+# max_tokens = 1000
+# temperature = 0.9
+# top_p = 0.95
+#
+# --- Deterministic Output (low temperature) ---
+# [generation]
+# max_tokens = 200
+# temperature = 0.1
+# top_p = 0.5
