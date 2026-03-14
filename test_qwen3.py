@@ -35,7 +35,7 @@ def test_chat_model():
     # Test generation
     print("\n[2] Testing generation...")
     prompts = [
-        "你好，请用一句话介绍你自己。",
+        "Introduce yourself。",
         "What is 2 + 2?",
     ]
 
@@ -78,10 +78,10 @@ def test_embedding_model():
     # Test embedding
     print("\n[2] Testing embedding...")
     texts = [
-        "葆婴益生菌的成份含量",
-        "usana cellsentials的成份含量",
-        "优莎纳磷脂亚麻酸软胶囊的成份含量",
-        "优莎纳磷脂亚麻酸软胶囊和葆婴益生菌的区别",
+        "what is your name",
+        "where is shanghai",
+        "apple is red",
+        "what is the difference between banana and organge？",
     ]
 
     for text in texts:
