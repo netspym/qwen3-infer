@@ -1,4 +1,4 @@
-# Qwen3 Inference
+# Qwen3 Embedding fast Inference
 
 A Rust-based super light-weight inference engine for Qwen3 small models (chat and embedding) with CPU optimization.
 You could run it in a 2 cores old cpu or cloud server without calling external APIs
@@ -18,6 +18,9 @@ You could run it in a 2 cores old cpu or cloud server without calling external A
 
 1. **Install Rust** (if not already installed):
 ```bash
+sudo apt update
+sudo apt install -y build-essential pkg-config libssl-dev curl ca-certificates
+
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source ~/.cargo/env
 ```
@@ -33,7 +36,8 @@ cargo build --release --features accelerate
 
 **Option 1: Without BLAS (simplest, works everywhere)**
 ```bash
-cargo build --release
+cd ~/projects/qwen3-infer
+cargo build --release --bin qwen3-infer
 ```
 
 **Option 2: With Intel MKL (faster, works on AMD too)**
@@ -79,26 +83,22 @@ no_think = true
 
 | Model | Type | Size |
 |-------|------|------|
-| `Qwen/Qwen3-0.6B` | chat | ~1.4GB |
-| `Qwen/Qwen3-1.7B` | chat | ~3.5GB |
 | `Qwen/Qwen3-Embedding-0.6B` | embedding | ~1.1GB |
 
 Models are downloaded from ModelScope and cached locally.
 
 ## Performance
 
-Expected performance on CPU (tokens/second for generation):
+Expected performance on CPU (second for generation):
 
 | CPU | No BLAS | With MKL/Accelerate |
 |-----|---------|---------------------|
-| Apple M1/M2/M3 | ~2-3 | ~4-6 |
-| AMD EPYC | ~1-2 | ~3-5 |
-| Intel Xeon | ~1-2 | ~3-5 |
+| Intel Xeon 2 cores | ~1 | ~0.6 |
 
 ## Configuration Options
 
 ### Model Settings
-```toml
+```config.toml
 [model]
 name = "Qwen/Qwen3-0.6B"    # Model name on ModelScope
 type = "chat"                # "chat" or "embedding"
