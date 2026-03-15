@@ -29,6 +29,8 @@ source ~/.cargo/env
 
 ```bash
 # With Apple Accelerate (optimized BLAS)
+git clone https://github.com/netspym/qwen3-embedding-infer-rust/
+cd qwen3-embedding-infer-rust
 cargo build --release --features accelerate
 ```
 
@@ -37,7 +39,7 @@ cargo build --release --features accelerate
 **Option 1: Without BLAS (simplest, works everywhere)**
 ```bash
 cd ~/projects/qwen3-infer
-cargo build --release --bin qwen3-infer
+cargo build --release --bin qwen3-embedding-infer-rust
 ```
 
 **Option 2: With Intel MKL (faster, works on AMD too)**
@@ -100,7 +102,7 @@ Expected performance on CPU (second for generation):
 ```
 sudo apt install -y python3 python3-pip python3-dev
 python3 -m pip install -U pip maturin
-cd ~/projects/qwen3-infer
+cd ~/projects/qwen3-embedding-infer-rust
 maturin develop --release
 python3 test_qwen3.py
 ```
